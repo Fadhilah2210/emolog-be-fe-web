@@ -1,62 +1,130 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# 📔 Emolog - Emotion Journal App
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+**Emolog** adalah aplikasi journaling harian berbasis web yang dilengkapi fitur analisis sentimen menggunakan AI. Aplikasi ini membantu pengguna merefleksikan perasaan mereka setiap hari melalui catatan dan emosi yang terekam secara otomatis.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## 🛠️ Teknologi yang Digunakan
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **Frontend:** JavaScript (Vite)
+- **Backend:** Laravel 10+
+- **Analisis Sentimen:** Python (BERT-based model dengan Flask)
+- **Database:** MySQL (XAMPP)
+- **Local Server:** XAMPP (Apache + MySQL)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+---
 
-## Learning Laravel
+## 🚀 Cara Menjalankan Project Secara Lokal
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 1. Jalankan XAMPP
+- Aktifkan **Apache** dan **MySQL** melalui XAMPP Control Panel.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### 2. Kloning dan Install Dependency
+```bash
+git clone <repository-url>
+cd emolog
+composer install
+npm install
+```
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### 3. Konfigurasi Environment
+- Duplikat file `.env.example` dan ubah nama menjadi `.env`
+- Atur konfigurasi database di dalam `.env`, contohnya:
 
-## Laravel Sponsors
+```env
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=emolog
+DB_USERNAME=root
+DB_PASSWORD=
+```
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Generate application key:
+```bash
+php artisan key:generate
+```
 
-### Premium Partners
+- Jalankan migrasi jika diperlukan:
+```bash
+php artisan migrate
+```
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+### 4. Jalankan Analisis Sentimen (Python)
+- Pastikan kamu sudah menginstall Python dan `pip`.
+- Masuk ke direktori tempat file Python `sentiment_api.py` berada:
+```bash
+cd sentiment-analysis
+python sentiment_api.py
+```
 
-## Contributing
+> Pastikan dependensi seperti `transformers`, `torch`, dan `flask` sudah terpasang.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Contoh install dependensi:
+```bash
+pip install -r requirements.txt
+```
+_atau jika tidak ada file `requirements.txt` bisa manual:_
+```bash
+pip install flask torch transformers
+```
 
-## Code of Conduct
+### 5. Jalankan Frontend
+```bash
+npm run dev
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 6. Jalankan Backend Laravel
+```bash
+php artisan serve
+```
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## 🌐 Akses Aplikasi
 
-## License
+- Frontend: `http://localhost:5173`
+- Backend: `http://127.0.0.1:8000`
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
-"# emologBE" 
+---
+
+## 📁 Struktur Folder Penting
+
+```
+emolog/
+├── app/
+├── bootstrap/
+├── config/
+├── database/
+├── public/
+├── resources/
+├── routes/
+├── sentiment-analysis/
+│   └── sentiment_api.py
+├── storage/
+├── tests/
+├── .env
+├── composer.json
+├── package.json
+└── README.md
+```
+
+
+## 📌 Catatan Tambahan
+
+- Jika `php artisan serve` tidak otomatis menjalankan project, pastikan tidak ada port yang bentrok (default 8000).
+- Disarankan menggunakan virtual environment untuk Python:
+```bash
+python -m venv venv
+# Windows
+venv\Scripts\activate
+# Linux/macOS
+source venv/bin/activate
+```
+
+---
+
+## 📝 Lisensi
+
+Project ini hanya digunakan untuk keperluan pembelajaran dan non-komersial.
+
